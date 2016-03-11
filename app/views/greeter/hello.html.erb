@@ -4,7 +4,19 @@
 
 <h1>Greetings, <%= @name %></h1>
 <p>The time is now <%= formatted_time(@time) %></p>
+
+<% #This is just until I get to the part about session vaiables
+	File.foreach('times_visited.txt') do |line|
+		@times_displayed = line.chomp
+	end
+%>
 <p>This page has been viewed <%= @times_displayed %> time(s)</p>
+<%
+	File.open('times_visited.txt', "w") do |file|
+		@times_displayed = @times_displayed.to_i + 1
+		file.puts @times_displayed
+	end
+%>
 
 <p><%= link_to "Google", "http://www.google.com" %></p>
 <p><%= link_to "Goodbye", greeter_goodbye_path %></p>
