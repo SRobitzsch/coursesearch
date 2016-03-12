@@ -1,18 +1,24 @@
-<h1>Searching for - <%= @search_term %></h1>
+<h1>Searching for: <%= @search_term %></h1>
+<!-- <h1><%= text_field_tag("txtSearchTerm") %></h1> -->
 
-<table border="1">
-	<tr>
-		<th>Image</th>
-		<th>Name</th>
-		<th>Description</th>
-	</tr>
-	<% @courses.each do |course| %>
-		<tr class=<%= cycle('even', 'odd') %> >
-			<td><%= image_tag(course["smallIcon"]) %></td>
-			<td><%= course["name"] %></td>
-			<td><%= course["shortDescription"] %></td>
+<% if @courses != nil %>
+	<table border="1">
+		<tr>
+			<th>Image</th>
+			<th>Name</th>
+			<th>Description</th>
 		</tr>
-	<% end %>
-</table>
+			<% @courses.each do |course| %>
+				<tr class=<%= cycle('even', 'odd') %> >
+					<td><%= image_tag(course["smallIcon"]) %></td>
+					<td><%= course["name"] %></td>
+					<td><%= course["shortDescription"] %></td>
+				</tr>
+			<% end %>
+	</table>
+<% else %>
+	<p>Aw snap, there are no courses that match <%= @search_term %>.</p>
+<% end %>
+
 
 <!-- <p>Find me in app/views/courses/index.html.erb</p> -->
